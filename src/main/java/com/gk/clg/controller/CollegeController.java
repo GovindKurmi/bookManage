@@ -19,18 +19,19 @@ public class CollegeController {
 
     @GetMapping("/getColleges")
     public ResponseEntity<List<College>> getColleges() {
-        log.info("inside getColleges method");
+        log.info("CollegeController::inside getColleges method");
         return ResponseEntity.ok().body(collegeService.getColleges());
     }
 
     @GetMapping("/getCollege/{id}")
     public ResponseEntity<College> getCollegeById(@PathVariable int id) {
-        log.info("inside getColleges method");
+        log.info("CollegeController::inside getCollegeById method");
         return ResponseEntity.ok(collegeService.getCollegeById(id));
     }
 
     @PostMapping("/addCollege")
     public ResponseEntity<College> addCollege(@RequestBody College college) {
+        log.info("CollegeController::inside addCollege method");
         return ResponseEntity.ok(collegeService.addCollege(college));
     }
 

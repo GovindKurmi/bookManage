@@ -1,29 +1,37 @@
 package com.gk.clg.controller;
 
 import com.gk.clg.model.College;
-import com.gk.clg.service.BookService;
+import com.gk.clg.service.CollegeService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/colleges")
+@RequiredArgsConstructor
 public class CollegeController {
 
-    @Autowired
-    private BookService bookService;
+    private final CollegeService collegeService;
 
     @GetMapping("/getColleges")
-    public List<College> getColleges() {
+    public ResponseEntity<List<College>> getColleges() {
         log.info("inside getColleges method");
-        return bookService.getColleges();
+        return ResponseEntity.ok().body(collegeService.getColleges());
+    }
+
+    @GetMapping("/getCollege/{id}")
+    public ResponseEntity<College> getCollegeById(@PathVariable int id) {
+        log.info("inside getColleges method");
+        return ResponseEntity.ok(collegeService.getCollegeById(id));
     }
 
     @PostMapping("/addCollege")
-    public College addCollege(@RequestBody College college) {
-        return bookService.addCollege(college);
+    public ResponseEntity<College> addCollege(@RequestBody College college) {
+        return ResponseEntity.ok(collegeService.addCollege(college));
     }
 
 }

@@ -1,15 +1,14 @@
 package com.gk.clg.service;
 
+import com.gk.clg.exception.NotFoundException;
 import com.gk.clg.model.College;
 import com.gk.clg.repo.CollegeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
@@ -33,6 +32,6 @@ public class CollegeServiceImpl implements CollegeService {
     @Cacheable("college")
     @Override
     public College getCollegeById(int id) {
-        return collegeRepository.findById(id).orElse(null);
+        return collegeRepository.findById(id).orElseThrow(() -> new NotFoundException("College data not found"));
     }
 }

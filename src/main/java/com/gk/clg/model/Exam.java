@@ -1,7 +1,6 @@
 package com.gk.clg.model;
 
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 
 
 @Getter
@@ -10,10 +9,9 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @EqualsAndHashCode
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Exam {
-    int id;
-    String name;
-    double salary;
+    private int id;
+    private String name;
+    private double salary;
 
 }

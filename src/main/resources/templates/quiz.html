@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz: [[${quiz.title}]]</title>
+</head>
+<body>
+<h1>[[${quiz.title}]]</h1>
+<p>[[${quiz.description}]]</p>
+<form th:action="@{/quiz/[[${quiz.id}]]/submit}" method="post">
+    <ul>
+        <li th:each="question : ${quiz.questions}">
+            <p th:text="${question.text}"></p>
+            <ul>
+                <li th:each="answer : ${question.answers}">
+                    <input type="radio" th:name="${question.id}" th:value="${answer.text}">
+                    <label th:text="${answer.text}"></label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <button type="submit">Submit Quiz</button>
+</form>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz Results</title>
+</head>
+<body>
+<h1>Your Quiz Results</h1>
+</body>
+</html>

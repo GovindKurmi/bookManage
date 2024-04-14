@@ -1,11 +1,11 @@
 package com.gk.clg.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-
 
 @Getter
 @Setter
@@ -13,14 +13,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "exam")
-public class Exam {
+@Table(name = "question")
+public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    @OneToMany(mappedBy = "exam")
+    private String text;
+    @ManyToOne
+    @JsonBackReference
+    private Exam exam;
+    @OneToMany(mappedBy = "question")
     @JsonManagedReference
-    private List<Question> questions;
+    private List<Answer> answers;
 }
